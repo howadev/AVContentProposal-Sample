@@ -45,7 +45,9 @@ final class Player: NSObject {
   fileprivate func addContentProposal() {
     let video = videos.removeFirst()
     videos.append(video) // Make it loop
-    let proposal = AVContentProposal(contentTimeForTransition: kCMTimeIndefinite, title: video.title,
+
+    let time = playerViewController.player!.currentItem!.asset.duration - CMTime(seconds: 20, preferredTimescale: 1000)
+    let proposal = AVContentProposal(contentTimeForTransition: time, title: video.title,
                                      previewImage: video.thumbnail)
     proposal.url = video.streamUrl
     proposal.automaticAcceptanceInterval = 3
